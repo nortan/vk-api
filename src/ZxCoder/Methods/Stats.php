@@ -7,12 +7,12 @@
  * Time: 11:39
  */
 
-namespace ZxCoder\Methods\Stat;
+namespace ZxCoder\Methods;
 
 use ZxCoder\Method;
-use ZxCoder\Methods\Stat\Responses\Get\Response;
+use ZxCoder\Methods\Stats\Response\Get\Response;
 
-class Stat extends Method
+class Stats extends Method
 {
     /**
      * Returns statistics of a community or an application.

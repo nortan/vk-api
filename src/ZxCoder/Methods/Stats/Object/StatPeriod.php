@@ -7,7 +7,7 @@
  * Time: 13:52
  */
 
-namespace ZxCoder\Methods\Stat\Objects;
+namespace ZxCoder\Methods\Stats\Object;
 
 use ZxCoder\JsonSerializable;
 use ZxCoder\RawArrayInterface;

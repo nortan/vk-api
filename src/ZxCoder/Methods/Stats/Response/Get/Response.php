@@ -7,10 +7,10 @@
  * Time: 13:52
  */
 
-namespace ZxCoder\Methods\Stat\Responses\Get;
+namespace ZxCoder\Methods\Stats\Response\Get;
 
 use VK\VKException;
-use ZxCoder\Methods\Stat\Objects\StatPeriod;
+use ZxCoder\Methods\Stats\Object\StatPeriod;
 use ZxCoder\RawArrayInterface;
 
 class Response implements \JsonSerializable, RawArrayInterface
@@ -21,6 +21,15 @@ class Response implements \JsonSerializable, RawArrayInterface
     public function jsonSerialize()
     {
         return $this->statPeriods;
+    }
+
+    /**
+     * Response constructor.
+     * @param array $statPeriods
+     */
+    public function __construct(array $statPeriods = [])
+    {
+        $this->statPeriods = $statPeriods;
     }
 
     public static function fromRawArray(array $raw)
@@ -36,7 +45,7 @@ class Response implements \JsonSerializable, RawArrayInterface
             $result[] = StatPeriod::fromRawArray($item);
         }
 
-        return $result;
+        return new self($result);
     }
 
     /**
