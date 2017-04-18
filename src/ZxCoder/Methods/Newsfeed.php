@@ -8,6 +8,7 @@
 
 namespace ZxCoder\Methods;
 
+use ZxCoder\Method;
 use ZxCoder\Methods\Newsfeed\Filter\GetFilter;
 
 class Newsfeed extends Method
@@ -26,15 +27,16 @@ class Newsfeed extends Method
         $response =  $this->getVk()
             ->api('newsfeed.get',
                 [
-                    'filters',
-                    'return_banned' = ,
-                    'start_time',
-                    'end_time',
-                    'max_photos',
+
+                    'filters'       => $filter->getFilterValue(),
+                    'return_banned' => (int) $return_banned,
+                    'start_time'    => $startTime->format('U'),
+                    'end_time'      => $endTime->format('U'),
+                    'max_photos'    => $maxPhotos,
                     'source_ids',
-                    'start_from',
-                    'count',
-                    'fields' = []
+                    'start_from'    => (int)$startFrom,
+                    'count'         => (int)$count,
+                    'fields'        => []
                 ]
             );
 

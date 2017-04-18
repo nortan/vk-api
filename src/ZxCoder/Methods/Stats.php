@@ -10,7 +10,9 @@
 namespace ZxCoder\Methods;
 
 use ZxCoder\Method;
-use ZxCoder\Methods\Stats\Response\Get\Response;
+
+use ZxCoder\Methods\Stats\Response\GetResponse;
+use ZxCoder\Methods\Stats\Response\GetPostReachResponse;
 
 class Stats extends Method
 {
@@ -21,7 +23,7 @@ class Stats extends Method
      * @param \DateTime $dateTo   - End date of statistics to return.
      * @param integer   $groupId  - Community ID
      *
-     * @return Response
+     * @return GetResponse
      */
     public function get(\DateTime $dateFrom, \DateTime $dateTo, $groupId)
     {
@@ -34,7 +36,7 @@ class Stats extends Method
                 ]
             );
 
-        return Response::fromRawArray($response);
+        return GetResponse::fromRawArray($response);
     }
 
     public function trackVisitor()
@@ -42,8 +44,16 @@ class Stats extends Method
         throw new \Exception('Method not realized');
     }
 
-    public function getPostReach()
+    public function getPostReach($postId, $ownerId = -1)
     {
-        throw new \Exception('Method not realized');
+        $response =  $this->getVk()
+            ->api('stats.getPostReach',
+                [
+                    'owner_id' => (int)$ownerId,
+                    'post_id'  => (int)$postId,
+                ]
+            );
+
+        return GetPostReachResponse::fromRawArray($response);
     }
 }
