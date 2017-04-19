@@ -35,11 +35,6 @@ class GetResponse implements \JsonSerializable, RawArrayInterface
     public static function fromRawArray(array $raw)
     {
         $result = [];
-        if (isset($raw['error'])) {
-            throw new VKException('API ERROR: ' . $raw['error']['error_msg']);
-        } else if (!isset($raw['response'])) {
-            throw new VKException('Wrong response');
-        }
 
         foreach ($raw['response'] as $item) {
             $result[] = StatPeriod::fromRawArray($item);

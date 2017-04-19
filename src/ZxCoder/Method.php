@@ -10,6 +10,7 @@
 namespace ZxCoder;
 
 use VK\VK;
+use VK\VKException;
 
 abstract class Method
 {
@@ -34,8 +35,22 @@ abstract class Method
     /**
      * @param VK $vk
      */
-    public function setVk($vk)
+    public function setVk(VK $vk)
     {
         $this->vk = $vk;
+    }
+
+    /**
+     * @param array $response
+     *
+     * @throws VKException
+     */
+    public function checkResponse(array $response)
+    {
+        if (isset($response['error'])) {
+            throw new VKException('API ERROR: ' . $response['error']['error_msg']);
+        } else if (!isset($response['response'])) {
+            throw new VKException('Wrong response');
+        }
     }
 }

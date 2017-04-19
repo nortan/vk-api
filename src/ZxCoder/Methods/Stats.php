@@ -36,6 +36,8 @@ class Stats extends Method
                 ]
             );
 
+        $this->checkResponse($response);
+
         return GetResponse::fromRawArray($response);
     }
 
@@ -53,6 +55,8 @@ class Stats extends Method
                     'post_id'  => (int)$postId,
                 ]
             );
+
+        $this->checkResponse($response);
 
         return GetPostReachResponse::fromRawArray($response);
     }
