@@ -8,7 +8,7 @@
 
 namespace ZxCoder;
 
-class VKException extends VK\VKException
+class VKException extends \VK\VKException
 {
 	private $_rawResponse;
 
