@@ -13,5 +13,34 @@ use ZxCoder\Method;
 
 class Messages extends Method
 {
+    public function get(
+        $out,
+        $count,
+        $offset,
+        $timeOffset,
+        $filters,
+        $previewLength,
+        $lastMessageId
+    )
+    {
+        $data = [
+            'out'             => (int)$out,
+            'count'           => (int)$count,
+            'offset'          => (int)$offset,
+            'time_offset'     => (int)$timeOffset,
+            'preview_length'  => (int)$previewLength,
+            'last_message_id' => (int)$lastMessageId,
+        ];
 
+        if ($filters) {
+            $data['filters'] = $filters;
+        }
+
+        $response =  $this->getVk()
+            ->api('messages.get', $data);
+
+        $this->checkResponse($response);
+
+        return $response;
+    }
 }

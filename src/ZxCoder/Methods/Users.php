@@ -13,5 +13,29 @@ use ZxCoder\Method;
 
 class Users extends Method
 {
+    public function get(
+        array $fields = [],
+        array $userIds = [],
+        $nameCase = 'nom'
+    )
+    {
+        $data = [
+            'name_case' => $nameCase,
+        ];
 
+        if ($fields) {
+           $data['fields'] = implode(',', $fields);
+        }
+
+        if ($userIds) {
+            $data['user_ids'] = implode(',', $userIds);
+        }
+
+        $response =  $this->getVk()
+            ->api('users.get', $data);
+
+        $this->checkResponse($response);
+
+        return $response;
+    }
 }

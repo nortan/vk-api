@@ -13,5 +13,36 @@ use ZxCoder\Method;
 
 class Notes extends Method
 {
+    CONST SORT_DATE_DESC = 0;
+    CONST SORT_DATE_ASC  = 1;
 
+    public function get(
+        $count,
+        $offset,
+        $userId = null,
+        array $noteIds = [],
+        $sort = self::SORT_DATE_DESC
+    )
+    {
+        $data = [
+            'count'    => (int)$count,
+            'offset'   => (int)$offset,
+            'sort'     => (int)$sort
+        ];
+
+        if ($userId) {
+            $data['user_id'] = (int)$userId;
+        }
+
+        if ($noteIds) {
+            $data['note_ids'] = implode(',', $noteIds);
+        }
+
+        $response =  $this->getVk()
+            ->api('notes.get', $data);
+
+        $this->checkResponse($response);
+
+        return $response;
+    }
 }

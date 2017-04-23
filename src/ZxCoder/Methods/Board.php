@@ -13,5 +13,33 @@ use ZxCoder\Method;
 
 class Board extends Method
 {
+    public function getComments(
+        $groupId,
+        $topicId,
+        $startCommentId,
+        $count,
+        $offset,
+        $extended = 1,
+        $sort = 'asc',
+        $needLikes = 1
+    )
+    {
+        $data = [
+            'group_id'         => (int)$groupId,
+            'topic_id'         => (int)$topicId,
+            'start_comment_id' => (int)$startCommentId,
+            'count'            => (int)$count,
+            'offset'           => (int)$offset,
+            'sort'             => $sort,
+            'need_likes'       => (int)$needLikes,
+            'extended'         => (int)$extended,
+        ];
 
+        $response =  $this->getVk()
+            ->api('board.getComments', $data);
+
+        $this->checkResponse($response);
+
+        return $response;
+    }
 }

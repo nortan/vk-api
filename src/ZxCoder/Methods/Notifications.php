@@ -13,5 +13,36 @@ use ZxCoder\Method;
 
 class Notifications extends Method
 {
+    public function get(
+        $count,
+        $startFrom,
+        array $filters = [],
+        \DateTime $startTime = null,
+        \DateTime $endTime   = null
+    )
+    {
+        $data = [
+            'count'      => $count,
+            'start_from' => $startFrom,
+        ];
 
+        if ($filters) {
+            $data['filters'] = implode(',', $filters);
+        }
+
+        if ($startTime) {
+            $data['start_time'] =  $startTime->format('U');
+        }
+
+        if ($endTime) {
+            $data['end_time'] = $endTime->format('U');
+        }
+
+        $response =  $this->getVk()
+            ->api('notifications.get', $data);
+
+        $this->checkResponse($response);
+
+        return $response;
+    }
 }
