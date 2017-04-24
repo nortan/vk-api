@@ -41,7 +41,7 @@ class Video extends Method
             $data['videos'] = implode(',', $videos);
         }
 
-        $response =  $this->getVk()
+        $response =  $this
             ->api('video.get', $data);
 
         $this->checkResponse($response);

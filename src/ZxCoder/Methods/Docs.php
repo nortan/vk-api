@@ -40,7 +40,7 @@ class Docs extends Method
             $data['owner_id'] = (int)$ownerId;
         }
 
-        $response =  $this->getVk()
+        $response =  $this
             ->api('docs.get', $data);
 
         $this->checkResponse($response);

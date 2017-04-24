@@ -44,7 +44,7 @@ class Wall extends Method
             $data['fields'] = implode(',', $fields);
         }
 
-        $response =  $this->getVk()
+        $response =  $this
             ->api('wall.get', $data);
 
         $this->checkResponse($response);
@@ -81,7 +81,7 @@ class Wall extends Method
             $data['fields'] = implode(',', $fields);
         }
 
-        $response =  $this->getVk()
+        $response =  $this
             ->api('wall.getComments', $data);
 
         $this->checkResponse($response);

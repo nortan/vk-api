@@ -33,7 +33,7 @@ class Pages extends Method
             'need_html'    => (int)$needHtml,
         ];
 
-        $response =  $this->getVk()
+        $response =  $this
             ->api('pages.get', $data);
 
         $this->checkResponse($response);

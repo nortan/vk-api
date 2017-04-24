@@ -36,7 +36,7 @@ class Messages extends Method
             $data['filters'] = $filters;
         }
 
-        $response =  $this->getVk()
+        $response =  $this
             ->api('messages.get', $data);
 
         $this->checkResponse($response);

@@ -38,7 +38,7 @@ class Notifications extends Method
             $data['end_time'] = $endTime->format('U');
         }
 
-        $response =  $this->getVk()
+        $response =  $this
             ->api('notifications.get', $data);
 
         $this->checkResponse($response);

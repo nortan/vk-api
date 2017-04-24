@@ -38,7 +38,7 @@ class Notes extends Method
             $data['note_ids'] = implode(',', $noteIds);
         }
 
-        $response =  $this->getVk()
+        $response =  $this
             ->api('notes.get', $data);
 
         $this->checkResponse($response);

@@ -35,7 +35,7 @@ class Board extends Method
             'extended'         => (int)$extended,
         ];
 
-        $response =  $this->getVk()
+        $response =  $this
             ->api('board.getComments', $data);
 
         $this->checkResponse($response);

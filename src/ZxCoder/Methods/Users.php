@@ -31,7 +31,7 @@ class Users extends Method
             $data['user_ids'] = implode(',', $userIds);
         }
 
-        $response =  $this->getVk()
+        $response =  $this
             ->api('users.get', $data);
 
         $this->checkResponse($response);

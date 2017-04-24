@@ -13,6 +13,7 @@ use VK\VK;
 
 abstract class Method
 {
+    const VERSION = '5.52';
     /**
      * @var VK $vk
      */
@@ -51,5 +52,11 @@ abstract class Method
         } else if (!isset($response['response'])) {
 			VKException::create($response, 'Wrong response');
         }
+    }
+
+    public function api($method, array $parameters)
+    {
+        $parameters['v'] = self::VERSION;
+        return $this->getVk()->api($method, $parameters);
     }
 }
