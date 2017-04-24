@@ -55,9 +55,9 @@ class Wall extends Method
     public function getComments(
         $ownerId,
         $postId,
-        $startCommentId,
         $count,
         $offset,
+        $startCommentId = null,
         $fields = [],
         $previewLength = 0,
         $extended = 1,
@@ -68,7 +68,6 @@ class Wall extends Method
         $data = [
             'owner_id'         => (int)$ownerId,
             'post_id'          => (int)$postId,
-            'start_comment_id' => (int)$startCommentId,
             'count'            => (int)$count,
             'offset'           => (int)$offset,
             'sort'             => $sort,
@@ -79,6 +78,10 @@ class Wall extends Method
 
         if ($fields) {
             $data['fields'] = implode(',', $fields);
+        }
+
+        if ($startCommentId) {
+            $data['start_comment_id'] = (int)$startCommentId;
         }
 
         $response =  $this
