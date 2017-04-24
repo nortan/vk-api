@@ -13,5 +13,40 @@ use ZxCoder\Method;
 
 class Photos extends Method
 {
-
+	public function get(
+		$count,
+		$offset,
+		$ownerId = null,
+		$albumId = null,
+		$photoIds = [],
+		$rev = 0,
+		$extended = 1
+	)
+	{
+		$data = [
+			'count'    => (int)$count,
+			'offset'   => (int)$offset,
+			'rev'      => (int)$rev,
+			'extended' => (int)$extended,
+		];
+		
+		if ($ownerId) {
+			$data['owner_id'] = (int)$ownerId;
+		}
+		
+		if ($albumId) {
+			$data['album_id'] = (int)$albumId;
+		}
+		
+		if ($photoIds) {
+			$data['photo_ids'] = implode(',', $photoIds);
+		}
+		
+		$response =  $this
+			->api('photos.get', $data);
+		
+		$this->checkResponse($response);
+		
+		return $response;
+	}
 }

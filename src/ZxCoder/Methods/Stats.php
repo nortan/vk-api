@@ -13,6 +13,7 @@ use ZxCoder\Method;
 
 use ZxCoder\Methods\Stats\Response\GetResponse;
 use ZxCoder\Methods\Stats\Response\GetPostReachResponse;
+use ZxCoder\VKException;
 
 class Stats extends Method
 {
@@ -58,6 +59,9 @@ class Stats extends Method
 
         $this->checkResponse($response);
 
-        return GetPostReachResponse::fromRawArray($response);
+        if (!isset($response['response'][0])) {
+        	throw VKException::create($response, 'Wrong response for stats.getPostReach');
+		}
+        return GetPostReachResponse::fromRawArray($response['response'][0]);
     }
 }
