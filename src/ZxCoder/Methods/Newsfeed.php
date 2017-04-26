@@ -35,12 +35,12 @@ class Newsfeed extends Method
 			'count'         => (int)$count,
 			'fields'        => implode(',', $fields),
 		];
-
+		
 		if ($startFrom) {
-			$data['from'] = $startFrom;
+			$data['start_from'] = $startFrom;
 		}
 
-		$response =  $this->getVk()
+		$response =  $this
 			->api('newsfeed.get', $data);
 
         $this->checkResponse($response);
