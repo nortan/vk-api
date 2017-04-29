@@ -35,7 +35,7 @@ class Photos extends Method
 		}
 		
 		if ($albumId) {
-			$data['album_id'] = (int)$albumId;
+			$data['album_id'] = $albumId;
 		}
 		
 		if ($photoIds) {
