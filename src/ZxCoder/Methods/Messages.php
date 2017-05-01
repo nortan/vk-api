@@ -43,4 +43,35 @@ class Messages extends Method
 
         return $response;
     }
+
+    public function getChat(
+    	$chatId,
+		array $chatIds = [],
+		array $fields  = [],
+		$nameCase      = 'nom'
+	)
+	{
+		$data = [
+			'name_case' => (int)$nameCase,
+		];
+
+		if ($chatId) {
+			$data['chat_id'] = (int)$chatId;
+		}
+
+		if ($chatIds) {
+			$data['chat_ids'] = implode(',', $chatIds);
+		}
+
+		if ($chatIds) {
+			$data['fields'] = implode(',', $fields);
+		}
+
+		$response =  $this
+			->api('messages.getChat', $data);
+
+		$this->checkResponse($response);
+
+		return $response;
+	}
 }

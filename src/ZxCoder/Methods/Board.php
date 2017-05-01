@@ -14,11 +14,11 @@ use ZxCoder\Method;
 class Board extends Method
 {
     public function getComments(
+		$count,
+		$offset,
         $groupId,
         $topicId,
         $startCommentId,
-        $count,
-        $offset,
         $extended = 1,
         $sort = 'asc',
         $needLikes = 1
