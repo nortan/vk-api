@@ -49,4 +49,32 @@ class Photos extends Method
 		
 		return $response;
 	}
+
+	public function getAlbums(
+		$count,
+		$offset,
+		$ownerId = null,
+		$albumIds = []
+	)
+	{
+		$data = [
+			'count'    => (int)$count,
+			'offset'   => (int)$offset,
+		];
+
+		if ($ownerId) {
+			$data['owner_id'] = (int)$ownerId;
+		}
+
+		if ($albumIds) {
+			$data['album_id'] = implode(',', $albumIds);
+		}
+
+		$response =  $this
+			->api('photos.getAlbums', $data);
+
+		$this->checkResponse($response);
+
+		return $response;
+	}
 }
