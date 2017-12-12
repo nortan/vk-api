@@ -13,6 +13,8 @@ use ZxCoder\Method;
 
 class Groups extends Method
 {
+    const SORT_TIME_DESC = 'time_desc';
+
 	public function get(
 		$count,
 		$offset,
@@ -76,4 +78,31 @@ class Groups extends Method
 		return $response;
 
 	}
+
+	public function getMembers(
+        $groupId,
+        $count,
+        $offset,
+        $fields = [],
+        $sort = self::SORT_TIME_DESC
+    )
+    {
+        $data = [
+            'count'    => $count,
+            'offset'   => $offset,
+            'sort'     => $sort,
+            'group_id' => $groupId,
+        ];
+
+        if ($fields) {
+            $data['fields'] = implode(',', $fields);
+        }
+
+        $response =  $this
+            ->api('groups.getMembers', $data);
+
+        $this->checkResponse($response);
+
+        return $response;
+    }
 }
